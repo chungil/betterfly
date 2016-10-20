@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="visit">
+
+	<!-- 새방명록 작성 -->
+	<insert id="newMemo" parameterType="java.util.HashMap">
+		insert into visitbook
+		values(visitbook_seq.nextval, #{writer},#{memo},#{ip}, sysdate)
+	</insert>
+
+	<!-- 전체 글 정보 -->
+	<select id="allMemo" resultType="pojo.Visitbook">
+		select * from visitbook order by
+		num desc
+	</select>
+
+	<!-- 작성자 일치 글색 -->
+	<select id="myMemo" resultType="java.util.HashMap">
+		select * from visitbook where
+		writer=#{w} order by num desc
+	</select>
+
+	<select id="boardView" resultType="java.util.HashMap">
+		select * from visitbook where
+		num=#{num}
+	</select>
+
+	<delete id="removeMemo" parameterType="java.lang.Integer">
+		delete * from visitbook where num=#{num}
+	</delete>
+
+</mapper>

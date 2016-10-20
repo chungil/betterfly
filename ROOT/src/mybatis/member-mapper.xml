@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	
+	<!-- select는 resultType 설정 필요 -->
+	<select id="login" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from member2 where id=#{id} and pw=#{pw}
+	</select>
+	
+	<update id="pointup" parameterType="java.lang.String">
+		update membership set point=point+10 where id=#{id}
+	</update>
+	
+	<insert id="join" parameterType="java.util.HashMap" >
+		insert into member2 values(#{id}, #{pw}, #{name}, sysdate)
+	</insert>
+	
+	<insert id="join-2" parameterType="pojo.member">
+		insert into member2 values(#{id}, #{pw}, #{name}, sysdate)
+	</insert>
+	
+	<insert id="joinPoint" parameterType="java.lang.String">
+		insert into membership values(#{id}, 1, 100)
+	</insert>
+	
+	<select id="myPage" resultType="java.util.HashMap">
+		select * from member2 where id=#{id}
+	</select>
+	
+</mapper>
+
